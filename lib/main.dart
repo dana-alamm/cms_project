@@ -1,3 +1,4 @@
+import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -113,7 +114,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        //  onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => SignInScreen()));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
