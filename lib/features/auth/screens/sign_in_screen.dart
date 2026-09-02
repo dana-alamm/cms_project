@@ -3,6 +3,7 @@ import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
 import 'package:cms_project_app/core/widgets/custom_text_field.dart';
 import 'package:cms_project_app/core/widgets/primary_button.dart';
 import 'package:cms_project_app/core/widgets/remember_me.dart';
+import 'package:cms_project_app/features/auth/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -132,7 +133,11 @@ class SignInScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                     MaterialPageRoute(builder: (context)=>const SignupScreen()));
+                },
               ),
             ],
           ),
