@@ -10,9 +10,11 @@ class AppColors {
   static const Color darkBgGlow = Color(0xFF330C11);
 
   static const Color textDark = Color(0xFF1E2022);
-  static const Color textMuted = Color(0xFF777E90);
+  // static const Color textMuted = Color(0xFF777E90);
   static const Color textLight = Colors.white;
   static const Color labelColor = Color(0xFF353945);
+  static const Color textMuted=Color(0xff71717A);
+  
 
   static const Color scaffoldBg = Color(0xFFF8F9FA);
   static const Color cardBg = Colors.white;
