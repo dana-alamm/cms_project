@@ -13,20 +13,32 @@ class PrimaryButton extends StatelessWidget {
     this.onPressed, 
     this.isLoading=false, 
     this.width=double.infinity, 
-    required this.height});
+    this.height=60});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
   width: width,
   height: height,
+  decoration: BoxDecoration(
+    
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.primaryRed.withOpacity(0.35), 
+            blurRadius: 18,                                
+            offset: const Offset(0, 8),                   
+            spreadRadius: 1,
+      )
+    ]
+  ),
   child: ElevatedButton(
     onPressed: isLoading ? null :onPressed, 
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primaryRed,
+      disabledBackgroundColor: AppColors.primaryRed,
       foregroundColor: Colors.white,
       elevation: 0,
-      shape: RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
     ),
@@ -45,6 +57,7 @@ class PrimaryButton extends StatelessWidget {
         fontFamily: 'Roboto',
         fontSize: 16,
         fontWeight: FontWeight.w600,
+        color:Colors.white
       ),
     )
     ),
