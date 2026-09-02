@@ -3,6 +3,7 @@ import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
 import 'package:cms_project_app/core/widgets/custom_text_field.dart';
 import 'package:cms_project_app/core/widgets/primary_button.dart';
 import 'package:cms_project_app/core/widgets/remember_me.dart';
+import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -225,7 +226,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                       MaterialPageRoute(builder: (context)=> SignInScreen()));
+                    },
                     child: const Text(
                       'Sign In',
                       style: TextStyle(
