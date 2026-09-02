@@ -42,7 +42,7 @@ class AuthScreenTemplate extends StatelessWidget {
                         Container(
                           width: double.infinity,
                           decoration: const BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.cardBg,
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(30),
                             ),
