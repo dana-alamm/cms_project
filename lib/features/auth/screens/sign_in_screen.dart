@@ -81,7 +81,7 @@ class SignInScreen extends StatelessWidget {
             children: [
               RememberMe(),
               Text(
-                "Can't access your account",
+                "Can't access my account",
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryRedDak,
@@ -105,13 +105,16 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8),
-              Text(
-                "Create an account",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  color: AppColors.primaryRedDak,
-                  fontWeight: FontWeight.w600,
+              GestureDetector(
+                child: Text(
+                  "Create an Account",
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    color: AppColors.primaryRedDak,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
+                onTap: () {},
               ),
             ],
           ),
