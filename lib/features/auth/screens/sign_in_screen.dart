@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AuthScreenTemplate(
@@ -65,15 +66,32 @@ class SignInScreen extends StatelessWidget {
           SizedBox(height: 24),
 
           CustomTextField(
+            prefixIcon: Icon(
+              Icons.email_outlined,
+              color: Colors.grey,
+              size: 18,
+            ),
             controller: emailController,
             hintText: "Enter your email",
             label: "Email Address",
+            keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 12),
           CustomTextField(
-            controller: emailController,
+            prefixIcon: Icon(
+              Icons.lock_outline_rounded,
+              color: Colors.grey,
+              size: 18,
+            ),
+            controller: passwordController,
             hintText: "Enter your password",
             label: "Password",
+
+            suffixIcon: Icon(
+              Icons.visibility_outlined,
+              color: Colors.grey,
+              size: 18,
+            ),
           ),
           SizedBox(height: 24),
           Row(
