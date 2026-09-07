@@ -142,7 +142,7 @@ class _SignupScreenState extends State<SignupScreen> {
               validator: (val) => val == null || val.length < 6 ? 'Password must be at least 6 characters' : null,
             ),
             const SizedBox(height: 15),
-            const RememberMe(),
+           
             const SizedBox(height: 20),
             PrimaryButton(
               text: 'Sign Up',
@@ -152,66 +152,9 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
             const SizedBox(height: 15),
-            Row(
-              children: const [
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'or',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      height: 1.5,
-                      letterSpacing: -0.32,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
-                ),
-              ],
-            ),
+           
             const SizedBox(height: 18),
-            SizedBox(
-              height: 50,
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.grey),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Continue with Google',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Image.asset(
-                      'assets/images/google-icon-removebg-preview.png',
-                      height: 22,
-                      width: 22,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+       
             const SizedBox(height: 18),
             Center(
               child: Wrap(
