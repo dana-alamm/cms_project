@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color bgColor=Color(0xFFF8F9FA);
   static const Color primaryRed = Color(0xffED1C24);
   static const Color primaryRedDak = Color(0xFFB80710); //when Hover
 
+static const Color iconColor=Color(0xFF334155);
   static const Color darkBg = Color(0xFF141416);
   static const Color darkBgGlow = Color(0xFF330C11);
 
@@ -21,6 +23,7 @@ class AppColors {
   static const Color inputFill = Color(0xFFFAFAFA);
   static const Color borderLight = Color(0xFFE6E8EC);
   static const Color borderFocused = primaryRed;
+  static const Color subtitle=Color(0xff9A9AA2);
   static const RadialGradient gradient = RadialGradient(
     center: Alignment(0.65, -0.8),
     radius: 1.1,
