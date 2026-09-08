@@ -20,6 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _isPasswordObscured = true;
   @override
   void dispose() {
     emailController.dispose();
@@ -108,11 +109,20 @@ class _SignInScreenState extends State<SignInScreen> {
               controller: passwordController,
               hintText: "Enter your password",
               label: "Password",
-
-              suffixIcon: Icon(
-                Icons.visibility_outlined,
-                color: Colors.grey,
-                size: 18,
+              obscureText: _isPasswordObscured,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordObscured
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  color: Colors.grey,
+                  size: 18,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordObscured = !_isPasswordObscured;
+                  });
+                },
               ),
               validator: AppValidators.validatePassword,
             ),
@@ -120,7 +130,7 @@ class _SignInScreenState extends State<SignInScreen> {
             isLoading
                 ? const CircularProgressIndicator(
                     color: AppColors.primaryRedDak,
-                  ) // غيرنا اللون لأحمر عشان يبين
+                  )
                 : PrimaryButton(
                     text: "Sign In",
                     height: 55,
@@ -137,6 +147,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => TestScreen(),
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Welcome Back!"),
+                                    backgroundColor: AppColors.primaryRedDak,
                                   ),
                                 );
                               } catch (e) {
