@@ -1,7 +1,7 @@
 import 'package:cms_project_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class LoginProvider extends ChangeNotifier {
+class SigninProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
   bool _isLoading = false;
   bool get isLoading => _isLoading;
