@@ -1,5 +1,6 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
 import 'package:cms_project_app/features/dashboard/widgets/dashboard_header.dart';
+import 'package:cms_project_app/features/dashboard/widgets/schedule_card.dart';
 import 'package:cms_project_app/features/dashboard/widgets/stats_grid.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,8 @@ class DashboardScreen extends StatelessWidget {
           const DashboardHeader(),
           const SizedBox(height: 20,),
           const StatsGrid(),
+          const SizedBox(height: 20,),
+          const ScheduleCard(),
         ],
       ),
     )
