@@ -1,4 +1,5 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
+import 'package:cms_project_app/features/dashboard/widgets/contact_distribution_card.dart';
 import 'package:cms_project_app/features/dashboard/widgets/dashboard_header.dart';
 import 'package:cms_project_app/features/dashboard/widgets/schedule_card.dart';
 import 'package:cms_project_app/features/dashboard/widgets/stats_grid.dart';
@@ -22,6 +23,8 @@ class DashboardScreen extends StatelessWidget {
           const StatsGrid(),
           const SizedBox(height: 20,),
           const ScheduleCard(),
+          const SizedBox(height: 20,),
+          const ContactDistributionCard(),
         ],
       ),
     )
