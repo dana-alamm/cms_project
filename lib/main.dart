@@ -1,4 +1,4 @@
-import 'package:cms_project_app/features/auth/controller/login_provider.dart';
+import 'package:cms_project_app/features/auth/controller/signin_provider.dart';
 import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => LoginProvider(),
+      create: (context) => SigninProvider(),
       child: const MyApp(),
     ),
   );
