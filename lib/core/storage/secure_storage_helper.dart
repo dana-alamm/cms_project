@@ -15,4 +15,17 @@ class SecureStorageHelper {
   Future<void> deleteToken() async {
     await _storage.delete(key: 'access_token');
   }
+
+  Future<void> saveEmail(String email) async {
+    await _storage.write(key: 'email', value: email);
+  }
+
+  Future<String?> getEmail() async {
+    String? email = await _storage.read(key: 'email');
+    return email;
+  }
+
+  Future<void> deleteEmail() async {
+    await _storage.delete(key: 'email');
+  }
 }

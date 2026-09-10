@@ -1,6 +1,7 @@
 import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
 import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
+import 'package:cms_project_app/features/test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cms_project_app/core/theme/app_colors.dart';
 
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token != null) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        MaterialPageRoute(builder: (context) => TestScreen()),
       );
     } else {
       Navigator.pushReplacement(

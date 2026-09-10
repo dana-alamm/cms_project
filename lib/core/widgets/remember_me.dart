@@ -2,8 +2,13 @@ import 'package:cms_project_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class RememberMe extends StatelessWidget {
-  const RememberMe({super.key});
-
+  final bool isChecked;
+  final Function(bool?) onChanged;
+  const RememberMe({
+    super.key,
+    this.isChecked = false,
+    required this.onChanged,
+  });
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,8 +17,8 @@ class RememberMe extends StatelessWidget {
           width: 20,
           height: 20,
           child: Checkbox(
-            value: false, // will be changed once the logic is implemented.
-            onChanged: (val) {},
+            value: isChecked,
+            onChanged: onChanged,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
