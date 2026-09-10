@@ -1,8 +1,10 @@
+import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
 import 'package:cms_project_app/core/theme/app_colors.dart';
 import 'package:cms_project_app/core/utils/app_validators.dart';
 import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
 import 'package:cms_project_app/core/widgets/custom_text_field.dart';
 import 'package:cms_project_app/core/widgets/primary_button.dart';
+import 'package:cms_project_app/core/widgets/remember_me.dart';
 import 'package:cms_project_app/features/auth/controller/signin_provider.dart';
 import 'package:cms_project_app/features/auth/screens/signup_screen.dart';
 import 'package:cms_project_app/features/test_screen.dart';
@@ -17,15 +19,34 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  SecureStorageHelper _storageHelper = SecureStorageHelper();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isPasswordObscured = true;
+  bool _isRememberMeChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadSavedEmail();
+  }
+
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> loadSavedEmail() async {
+    String? email = await _storageHelper.getEmail();
+    if (email != null) {
+      setState(() {
+        emailController.text = email;
+        _isRememberMeChecked = true;
+      });
+    }
   }
 
   @override
@@ -71,6 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
           key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
               const Text(
                 "Sign In",
@@ -130,7 +152,17 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 validator: AppValidators.validatePassword,
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 16),
+              RememberMe(
+                isChecked: _isRememberMeChecked,
+                onChanged: (val) {
+                  setState(() {
+                    _isRememberMeChecked = val ?? false;
+                  });
+                },
+              ),
+
+              SizedBox(height: 28),
               isLoading
                   ? const CircularProgressIndicator(
                       color: AppColors.primaryRedDak,
@@ -144,6 +176,13 @@ class _SignInScreenState extends State<SignInScreen> {
                               FocusScope.of(context).unfocus();
                               if (_formKey.currentState!.validate()) {
                                 try {
+                                  if (_isRememberMeChecked == true) {
+                                    await _storageHelper.saveEmail(
+                                      emailController.text,
+                                    );
+                                  } else {
+                                    await _storageHelper.deleteEmail();
+                                  }
                                   await context.read<SigninProvider>().signin(
                                     emailController.text,
                                     passwordController.text,
