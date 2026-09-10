@@ -126,7 +126,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
             child: ElevatedButton(
               onPressed: (){}, 
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFDC2626),
+                backgroundColor: const Color(0xFFE30613),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -219,7 +219,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
     if (isToday) {
       return Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFDC2626),
+          color: const Color(0xFFE30613),
           borderRadius: BorderRadius.circular(14),
         ),
         alignment: Alignment.center,
