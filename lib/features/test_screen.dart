@@ -1,6 +1,8 @@
 import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TestScreen extends StatelessWidget {
   TestScreen({super.key});
@@ -19,7 +21,7 @@ class TestScreen extends StatelessWidget {
             SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                _storageHelper.deleteToken();
+                context.read<AuthProvider>().logout();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => SignInScreen()),
                 );

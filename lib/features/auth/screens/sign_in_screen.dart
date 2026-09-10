@@ -5,7 +5,7 @@ import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
 import 'package:cms_project_app/core/widgets/custom_text_field.dart';
 import 'package:cms_project_app/core/widgets/primary_button.dart';
 import 'package:cms_project_app/core/widgets/remember_me.dart';
-import 'package:cms_project_app/features/auth/controller/signin_provider.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/signup_screen.dart';
 import 'package:cms_project_app/features/test_screen.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = context.watch<SigninProvider>().isLoading;
+    bool isLoading = context.watch<AuthProvider>().isLoading;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -183,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   } else {
                                     await _storageHelper.deleteEmail();
                                   }
-                                  await context.read<SigninProvider>().signin(
+                                  await context.read<AuthProvider>().signin(
                                     emailController.text,
                                     passwordController.text,
                                   );
