@@ -1,4 +1,5 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
+import 'package:cms_project_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:cms_project_app/features/dashboard/widgets/contact_distribution_card.dart';
 import 'package:cms_project_app/features/dashboard/widgets/dashboard_header.dart';
 import 'package:cms_project_app/features/dashboard/widgets/favorite_contacts_card.dart';
@@ -39,6 +40,9 @@ class DashboardScreen extends StatelessWidget {
       ),
     )
     ),
+    bottomNavigationBar: CustomBottomNavBar(
+      currentIndex: 0,
+      ),
     );
   }
 }
