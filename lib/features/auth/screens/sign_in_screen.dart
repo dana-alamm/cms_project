@@ -19,7 +19,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  SecureStorageHelper _storageHelper = SecureStorageHelper();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -40,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> loadSavedEmail() async {
-    String? email = await _storageHelper.getEmail();
+    String? email = await context.read<AuthProvider>().getSavedEmail();
     if (email != null) {
       setState(() {
         emailController.text = email;
@@ -176,13 +175,12 @@ class _SignInScreenState extends State<SignInScreen> {
                               FocusScope.of(context).unfocus();
                               if (_formKey.currentState!.validate()) {
                                 try {
-                                  if (_isRememberMeChecked == true) {
-                                    await _storageHelper.saveEmail(
-                                      emailController.text,
-                                    );
-                                  } else {
-                                    await _storageHelper.deleteEmail();
-                                  }
+                                  await context
+                                      .read<AuthProvider>()
+                                      .handleRememberMe(
+                                        _isRememberMeChecked,
+                                        emailController.text,
+                                      );
                                   await context.read<AuthProvider>().signin(
                                     emailController.text,
                                     passwordController.text,

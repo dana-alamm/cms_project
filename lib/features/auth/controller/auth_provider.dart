@@ -8,6 +8,10 @@ class AuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool _isAuthenticated = false;
   bool get isLoading => _isLoading;
+  void setAuthenticated(bool value) {
+    _isAuthenticated = value;
+    notifyListeners();
+  }
 
   Future<void> signin(String email, String password) async {
     _isLoading = true;
@@ -25,11 +29,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void setAuthenticated(bool value) {
-    _isAuthenticated = value;
-    notifyListeners();
-  }
-
   Future<void> logout() async {
     try {
       await _storageHelper.deleteToken();
@@ -37,6 +36,18 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<String?> getSavedEmail() async {
+    return await _storageHelper.getEmail();
+  }
+
+  Future<void> handleRememberMe(bool isChecked, String email) async {
+    if (isChecked) {
+      await _storageHelper.saveEmail(email);
+    } else {
+      await _storageHelper.deleteEmail();
     }
   }
 }
