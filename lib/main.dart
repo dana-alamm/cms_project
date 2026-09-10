@@ -1,13 +1,13 @@
-import 'package:cms_project_app/features/auth/controller/signin_provider.dart';
-import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
+import 'package:cms_project_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => SigninProvider(),
+      create: (context) => AuthProvider(),
       child: const MyApp(),
     ),
   );
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
 
-      home: DashboardScreen(),
+      home: SplashScreen(),
     );
   }
 }
