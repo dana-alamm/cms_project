@@ -7,6 +7,7 @@ import 'package:cms_project_app/core/widgets/primary_button.dart';
 import 'package:cms_project_app/core/widgets/remember_me.dart';
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/signup_screen.dart';
+import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
 import 'package:cms_project_app/features/test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -188,7 +189,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                   if (!context.mounted) return;
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => TestScreen(),
+                                    //  builder: (context) => TestScreen(),
+                                    builder: (context) => DashboardScreen(),
                                     ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
