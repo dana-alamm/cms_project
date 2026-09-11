@@ -1,4 +1,5 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
+import 'package:cms_project_app/features/notifications/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -50,7 +51,7 @@ class DashboardHeader extends StatelessWidget {
                   ),
                   const SizedBox(width: 8,),
                    _buildNotificationIcon(
-                    onTap: (){},
+                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder:(context)=> NotificationsScreen())),
                     ),
                     const SizedBox(width: 8,),
                     Container(
