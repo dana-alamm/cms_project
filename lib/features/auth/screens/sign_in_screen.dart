@@ -1,4 +1,3 @@
-import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
 import 'package:cms_project_app/core/theme/app_colors.dart';
 import 'package:cms_project_app/core/utils/app_validators.dart';
 import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
@@ -8,7 +7,6 @@ import 'package:cms_project_app/core/widgets/remember_me.dart';
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/signup_screen.dart';
 import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
-import 'package:cms_project_app/features/test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,7 +81,11 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Text(
                 'Sign in to access your enterprise dashboard, manage operations, and collaborate securely across your digital ecosystem.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.4),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                  height: 1.4,
+                ),
               ),
             ),
           ],
@@ -187,10 +189,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     passwordController.text,
                                   );
                                   if (!context.mounted) return;
-                                  Navigator.of(context).push(
+                                  Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                    //  builder: (context) => TestScreen(),
-                                    builder: (context) => DashboardScreen(),
+                                      builder: (context) => DashboardScreen(),
                                     ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -241,7 +242,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const SignupScreen(),
