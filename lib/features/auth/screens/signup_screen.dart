@@ -3,8 +3,10 @@ import 'package:cms_project_app/core/widgets/auth_screen_template.dart';
 import 'package:cms_project_app/core/widgets/custom_text_field.dart';
 import 'package:cms_project_app/core/widgets/primary_button.dart';
 import 'package:cms_project_app/core/widgets/remember_me.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -147,8 +149,36 @@ class _SignupScreenState extends State<SignupScreen> {
             PrimaryButton(
               text: 'Sign Up',
               height: 52,
-              onPressed: () {
-               
+              onPressed: ()async {
+               FocusScope.of(context).unfocus();
+
+               if(_formKey.currentState!.validate()){
+                try{
+                  await context.read<AuthProvider>().signup(
+                    fullNameController.text.trim(), 
+                    emailController.text.trim(), 
+                    passwordController.text
+                    );
+                    if(!context.mounted)return;
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Account created successfully! Please sign in.'),
+                         backgroundColor: Colors.green,
+                      ),
+                    );
+                    Navigator.pop(context);
+
+                }catch (e){
+                  if(!context.mounted)return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString().replaceAll("Exception: ", "")),
+          backgroundColor: const Color(0xFFE30613),
+        ),
+      );
+                }
+               }
               },
             ),
             const SizedBox(height: 15),

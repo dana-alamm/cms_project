@@ -37,5 +37,46 @@ class AuthService {
     }
   }
 
-  // a function for the sign up can be added here.
+  
+  Future<void> signup({
+  required String fullName,
+  required String email,
+  required String password,
+}) async {
+  try {
+    await _apiClient.post(
+      "api/auth/signup",
+      data: {
+        "fullName": fullName,
+        "email": email,
+        "password": password,
+      },
+    );
+  } on DioException catch (e) {
+   
+    String? serverMessage;
+    if (e.response?.data is Map) {
+      serverMessage = e.response?.data['message'] ?? e.response?.data['error'];
+    } else if (e.response?.data is String && e.response!.data.isNotEmpty) {
+      serverMessage = e.response?.data;
+    }
+
+    if (e.response?.statusCode == 400) {
+      throw Exception(serverMessage ?? "Required fields are missing or invalid.");
+    } else if (e.response?.statusCode == 409) {
+      throw Exception(serverMessage ?? "This email is already registered.");
+    } else if (e.type == DioExceptionType.connectionTimeout ||
+        e.type == DioExceptionType.receiveTimeout ||
+        e.type == DioExceptionType.connectionError) {
+      throw Exception(
+        "Unable to connect. Please check your internet connection and try again.",
+      );
+    } else {
+      throw Exception(serverMessage ?? "Something went wrong. Please try again.");
+    }
+  } catch (e) {
+   
+    throw Exception(e.toString().replaceAll("Exception: ", ""));
+  }
 }
+  }

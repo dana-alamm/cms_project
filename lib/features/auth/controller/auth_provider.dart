@@ -50,4 +50,21 @@ class AuthProvider extends ChangeNotifier {
       await _storageHelper.deleteEmail();
     }
   }
+  Future<void> signup(String fullName,String email,String password)async{
+  _isLoading=true;
+  notifyListeners();
+
+  try{
+    await _authService.signup(
+      fullName: fullName, 
+      email: email, 
+      password: password);
+  }catch (e){
+    rethrow;
+  }finally{
+    _isLoading=false;
+    notifyListeners();
+  }
+
+  }
 }

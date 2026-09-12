@@ -1,7 +1,10 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
+import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
 import 'package:cms_project_app/features/profile/widgets/profile_menu_item.dart';
 import 'package:cms_project_app/features/profile/widgets/profile_section_header.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileMenuSheet extends StatelessWidget {
   const ProfileMenuSheet({super.key});
@@ -101,8 +104,14 @@ class ProfileMenuSheet extends StatelessWidget {
             title: 'Log Out',
             isDestructive: true,
             showArrow: false,
-            onTap: () {
-              
+            onTap: () async{
+              await context.read<AuthProvider>().logout();
+              if (!context.mounted) return;
+              Navigator.of(context,rootNavigator: true).pop();
+
+              Navigator.of(context).pushAndRemoveUntil(
+               MaterialPageRoute(builder: (context) => SignInScreen()),
+               (route) => false,);
             },
           ),
         ],
