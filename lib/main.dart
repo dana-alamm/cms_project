@@ -1,5 +1,4 @@
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
-import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
 import 'package:cms_project_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
