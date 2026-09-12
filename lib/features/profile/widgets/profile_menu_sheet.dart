@@ -8,9 +8,23 @@ import 'package:provider/provider.dart';
 
 class ProfileMenuSheet extends StatelessWidget {
   const ProfileMenuSheet({super.key});
+   
+   String _getInitials(String name){
+    final parts = name.trim().split(RegExp(r'\s+'));
+    if (parts.length >= 2 && parts[0].isNotEmpty && parts[1].isNotEmpty) {
+      return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
+    }
+    if (parts.isNotEmpty && parts[0].isNotEmpty) {
+      return parts[0][0].toUpperCase();
+    }
+    return 'U';
+   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<AuthProvider>().currentUser;
+    final String fullName = user?.fullName ?? 'User Name';
+    final String email = user?.email ?? 'user@estarta.co';
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
       child: Column(
@@ -23,7 +37,8 @@ class ProfileMenuSheet extends StatelessWidget {
                 radius: 28,
                 backgroundColor: Colors.black,
                 child: Text(
-                  'AM',
+                  //'AM',
+                  _getInitials(fullName),
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     color:Colors.white,
@@ -38,7 +53,8 @@ class ProfileMenuSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Amira Malik',
+                  //  'Amira Malik',
+                  fullName,
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
@@ -49,7 +65,8 @@ class ProfileMenuSheet extends StatelessWidget {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    'amira@estarta.co',
+                   // 'amira@estarta.co',
+                   email,
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       color:AppColors.subtitle,
