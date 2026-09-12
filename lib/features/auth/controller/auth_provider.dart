@@ -1,4 +1,5 @@
 import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
+import 'package:cms_project_app/features/auth/models/user_model.dart';
 import 'package:cms_project_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,8 @@ class AuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool _isAuthenticated = false;
   bool get isLoading => _isLoading;
+  UserModel? _currentUser;
+  UserModel? get currentUser=>_currentUser;
   void setAuthenticated(bool value) {
     _isAuthenticated = value;
     notifyListeners();
@@ -18,7 +21,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _authService.signin(email, password);
+     _currentUser= await _authService.signin(email, password);
       _isAuthenticated = true;
       notifyListeners();
     } catch (e) {
@@ -32,6 +35,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> logout() async {
     try {
       await _storageHelper.deleteToken();
+      _currentUser=null;
       _isAuthenticated = false;
       notifyListeners();
     } catch (e) {

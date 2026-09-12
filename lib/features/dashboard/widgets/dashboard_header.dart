@@ -1,8 +1,10 @@
 import 'package:cms_project_app/core/theme/app_colors.dart';
+import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/notifications/screens/notifications_screen.dart';
 import 'package:cms_project_app/features/profile/widgets/profile_menu_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DashboardHeader extends StatelessWidget {
   final String userName;
@@ -12,6 +14,16 @@ class DashboardHeader extends StatelessWidget {
     this.userName = 'Amira',
     this.intFollowUpsCount = 3,
   });
+   String _getInitials(String name){
+    final parts = name.trim().split(RegExp(r'\s+'));
+    if (parts.length >= 2 && parts[0].isNotEmpty && parts[1].isNotEmpty) {
+      return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
+    }
+    if (parts.isNotEmpty && parts[0].isNotEmpty) {
+      return parts[0][0].toUpperCase();
+    }
+    return 'U';
+   }
 
   void _showProfileDropdown(BuildContext context) {
   showGeneralDialog(
@@ -65,6 +77,8 @@ class DashboardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<AuthProvider>().currentUser;
+     final String fullName = user?.fullName ?? 'User Name';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,9 +139,10 @@ class DashboardHeader extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
-                    child: const Text(
-                      'AM',
-                      style: TextStyle(
+                    child: Text(
+                     // 'AM',
+                     _getInitials(fullName),
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                         fontSize: 13,
