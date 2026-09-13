@@ -28,4 +28,17 @@ class SecureStorageHelper {
   Future<void> deleteEmail() async {
     await _storage.delete(key: 'email');
   }
+
+  Future<void> savePassword(String password) async {
+    await _storage.write(key: 'password', value: password);
+  }
+
+  Future<String?> getPassword() async {
+    String? password = await _storage.read(key: 'password');
+    return password;
+  }
+
+  Future<void> deletePassword() async {
+    await _storage.delete(key: 'password');
+  }
 }
