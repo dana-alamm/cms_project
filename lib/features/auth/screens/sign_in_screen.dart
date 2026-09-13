@@ -27,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    loadSavedEmail();
+    loadSavedEmailAndPassword();
   }
 
   @override
@@ -37,11 +37,13 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  Future<void> loadSavedEmail() async {
+  Future<void> loadSavedEmailAndPassword() async {
     String? email = await context.read<AuthProvider>().getSavedEmail();
-    if (email != null) {
+    String? password = await context.read<AuthProvider>().getSavedPassword();
+    if (email != null && password != null) {
       setState(() {
         emailController.text = email;
+        passwordController.text = password;
         _isRememberMeChecked = true;
       });
     }
@@ -183,6 +185,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       .handleRememberMe(
                                         _isRememberMeChecked,
                                         emailController.text,
+                                        passwordController.text,
                                       );
                                   await context.read<AuthProvider>().signin(
                                     emailController.text,

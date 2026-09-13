@@ -10,7 +10,7 @@ class AuthProvider extends ChangeNotifier {
   bool _isAuthenticated = false;
   bool get isLoading => _isLoading;
   UserModel? _currentUser;
-  UserModel? get currentUser=>_currentUser;
+  UserModel? get currentUser => _currentUser;
   void setAuthenticated(bool value) {
     _isAuthenticated = value;
     notifyListeners();
@@ -21,7 +21,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-     _currentUser= await _authService.signin(email, password);
+      _currentUser = await _authService.signin(email, password);
       _isAuthenticated = true;
       notifyListeners();
     } catch (e) {
@@ -35,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> logout() async {
     try {
       await _storageHelper.deleteToken();
-      _currentUser=null;
+      _currentUser = null;
       _isAuthenticated = false;
       notifyListeners();
     } catch (e) {
@@ -47,28 +47,39 @@ class AuthProvider extends ChangeNotifier {
     return await _storageHelper.getEmail();
   }
 
-  Future<void> handleRememberMe(bool isChecked, String email) async {
+  Future<String?> getSavedPassword() async {
+    return await _storageHelper.getPassword();
+  }
+
+  Future<void> handleRememberMe(
+    bool isChecked,
+    String email,
+    String password,
+  ) async {
     if (isChecked) {
       await _storageHelper.saveEmail(email);
+      await _storageHelper.savePassword(password);
     } else {
       await _storageHelper.deleteEmail();
+      await _storageHelper.deletePassword();
     }
   }
-  Future<void> signup(String fullName,String email,String password)async{
-  _isLoading=true;
-  notifyListeners();
 
-  try{
-    await _authService.signup(
-      fullName: fullName, 
-      email: email, 
-      password: password);
-  }catch (e){
-    rethrow;
-  }finally{
-    _isLoading=false;
+  Future<void> signup(String fullName, String email, String password) async {
+    _isLoading = true;
     notifyListeners();
-  }
 
+    try {
+      await _authService.signup(
+        fullName: fullName,
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
