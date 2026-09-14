@@ -1,14 +1,21 @@
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
+import 'package:cms_project_app/features/lookup/controller/lookup_provider.dart';
 import 'package:cms_project_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
-      child: const MyApp(),
-    ),
+    // ChangeNotifierProvider(
+    //   create: (context) => AuthProvider(),
+    //   child: const MyApp(),
+    // ),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=>AuthProvider()),
+        ChangeNotifierProvider(create: (context)=>LookupProvider()),
+      ]
+      )
   );
 }
 
