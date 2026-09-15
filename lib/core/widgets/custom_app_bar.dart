@@ -79,7 +79,7 @@ class CustomAppBar extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/estarta_logo.png',
-              height: 38,
+              height: 30,
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 9),
