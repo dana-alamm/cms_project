@@ -1,8 +1,7 @@
 import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
 import 'package:cms_project_app/features/auth/screens/sign_in_screen.dart';
-import 'package:cms_project_app/features/contacts/screens/contacts_screen.dart';
-import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
+import 'package:cms_project_app/features/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cms_project_app/core/theme/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       context.read<AuthProvider>().setAuthenticated(true);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashboardScreen()),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
     } else {
       Navigator.pushReplacement(
