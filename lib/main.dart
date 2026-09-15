@@ -1,4 +1,5 @@
 import 'package:cms_project_app/features/auth/controller/auth_provider.dart';
+import 'package:cms_project_app/features/contacts/controller/contacts_provider.dart';
 import 'package:cms_project_app/features/lookup/controller/lookup_provider.dart';
 import 'package:cms_project_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,12 @@ void main() {
     // ),
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>AuthProvider()),
-        ChangeNotifierProvider(create: (context)=>LookupProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => LookupProvider()),
+        ChangeNotifierProvider(create: ((context) => ContactsProvider())),
       ],
-      child:const MyApp(),
-      ),
+      child: const MyApp(),
+    ),
   );
 }
 

@@ -108,7 +108,7 @@ class CustomBottomNavBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 8),
                 const Text(
                   'Add',
                   style: TextStyle(
