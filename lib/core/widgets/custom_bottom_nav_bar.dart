@@ -17,14 +17,13 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomCenter,
-      clipBehavior: Clip.none, 
+      clipBehavior: Clip.none,
       children: [
-       
         ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
             child: Container(
-              height: 72,
+              height: 82,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.85),
@@ -39,86 +38,88 @@ class CustomBottomNavBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   // 1. Home
-                  _NavBarItem(
-                    icon: Icons.home_rounded,
-                    label: 'Home',
-                    isSelected: currentIndex == 0,
-                    onTap: () => onTap?.call(0),
+                  Expanded(
+                    child: _NavBarItem(
+                      icon: Icons.home_rounded,
+                      label: 'Home',
+                      isSelected: currentIndex == 0,
+                      onTap: () => onTap?.call(0),
+                    ),
                   ),
 
-                 
-                  _NavBarItem(
-                    icon: Icons.credit_card_rounded,
-                    label: 'Cards',
-                    isSelected: currentIndex == 1,
-                    onTap: () => onTap?.call(1),
+                  Expanded(
+                    child: _NavBarItem(
+                      icon: Icons.credit_card_rounded,
+                      label: 'Cards',
+                      isSelected: currentIndex == 1,
+                      onTap: () => onTap?.call(1),
+                    ),
+                  ),
+                  Spacer(),
+                  Expanded(
+                    child: _NavBarItem(
+                      icon: Icons.check_circle_outline_rounded,
+                      label: 'Follow-ups',
+                      isSelected: currentIndex == 2,
+                      badgeCount: 8,
+                      onTap: () => onTap?.call(2),
+                    ),
                   ),
 
-                 
-                  const SizedBox(width: 54),
-
-                  
-                  _NavBarItem(
-                    icon: Icons.check_circle_outline_rounded,
-                    label: 'Follow-ups',
-                    isSelected: currentIndex == 2,
-                    badgeCount: 8,
-                    onTap: () => onTap?.call(2),
-                  ),
-
-                  
-                  _NavBarItem(
-                    icon: Icons.bar_chart_rounded,
-                    label: 'Analytics',
-                    isSelected: currentIndex == 3,
-                    onTap: () => onTap?.call(3),
+                  Expanded(
+                    child: _NavBarItem(
+                      icon: Icons.bar_chart_rounded,
+                      label: 'Analytics',
+                      isSelected: currentIndex == 3,
+                      onTap: () => onTap?.call(3),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
         ),
-
-        
-        Positioned(
-          top: -24,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: onAddTap ?? () => onTap?.call(4),
-                child: Container(
-                  width: 58,
-                  height: 58,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE30613),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFFE30613).withOpacity(0.35),
-                        blurRadius: 18,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.add_rounded,
-                    color: Colors.white,
-                    size: 32,
+        Expanded(
+          child: Positioned(
+            top: -24,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: onAddTap ?? () => onTap?.call(4),
+                  child: Container(
+                    width: 58,
+                    height: 58,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE30613),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFFE30613).withOpacity(0.35),
+                          blurRadius: 18,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.add_rounded,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                'Add',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF9A9AA2),
+                const SizedBox(height: 4),
+                const Text(
+                  'Add',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF9A9AA2),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
@@ -196,7 +197,7 @@ class _NavBarItem extends StatelessWidget {
               label,
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                 color: isSelected ? activeColor : inactiveColor,
                 height: 1,
