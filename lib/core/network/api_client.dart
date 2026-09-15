@@ -1,3 +1,4 @@
+import 'package:cms_project_app/core/storage/secure_storage_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:cms_project_app/core/network/api_constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -30,6 +31,26 @@ class ApiClient {
   Future<Response> post(String path, {Map<String, dynamic>? data}) async {
     try {
       final response = await _dio.post(path, data: data);
+      return response;
+    } on DioException catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final token = await SecureStorageHelper().getToken();
+
+      final response = await _dio.get(
+        path,
+        queryParameters: queryParameters,
+        options: Options(
+          headers: {if (token != null) 'Authorization': 'Bearer $token'},
+        ),
+      );
       return response;
     } on DioException catch (e) {
       rethrow;
