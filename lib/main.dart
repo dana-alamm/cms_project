@@ -14,8 +14,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context)=>AuthProvider()),
         ChangeNotifierProvider(create: (context)=>LookupProvider()),
-      ]
-      )
+      ],
+      child:const MyApp(),
+      ),
   );
 }
 

@@ -11,14 +11,35 @@ class LookupProvider  extends ChangeNotifier{
   LookUpItemModel?_selectedCountry;
   LookUpItemModel?get selectedCountry=>_selectedCountry;
 
+  List<LookUpItemModel> _cities=[];
+  List<LookUpItemModel> get cities=>_cities;
+
+  LookUpItemModel? _selectedCity;
+  LookUpItemModel? get selectedCity => _selectedCity;
+
   bool _isloading=false;
   bool get isLoading=>_isloading;
+
+  bool _isLoadingCities = false;
+  bool get isLoadingCities => _isLoadingCities;
 
   String? _errorMessage;
   String? get errorMessage=>_errorMessage;
 
   void selecteCountry(LookUpItemModel? country){
     _selectedCountry=country;
+    _selectedCity=null;
+    _cities=[];
+     notifyListeners();
+
+    if(country!=null){
+      fetchCities(country.id);
+    }
+    
+  }
+
+  void selectCity(LookUpItemModel? city){
+    _selectedCity=city;
     notifyListeners();
   }
 
@@ -38,6 +59,22 @@ class LookupProvider  extends ChangeNotifier{
 
     }finally{
       _isloading=false;
+      notifyListeners();
+    }
+  }
+
+  Future<void>fetchCities(int countryId)async{
+    _isLoadingCities=true;
+    _errorMessage=null;
+    notifyListeners();
+
+
+    try {
+      _cities=await _lookupService.getCities(countryId);
+    } catch (e) {
+      _errorMessage=e.toString().replaceAll('Exception: ', '');
+    }finally{
+      _isLoadingCities=false;
       notifyListeners();
     }
   }
