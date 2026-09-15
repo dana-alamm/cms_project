@@ -32,4 +32,32 @@ class LookupService {
       throw Exception(e.toString());
     }
   }
+  Future<List<LookUpItemModel>>getCities(int countryId)async{
+    try {
+      final token=await _storageHelper.getToken();
+
+      final response=await _dio.get(
+        '$_baseUrl/cities/$countryId',
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $token',
+          }
+        )
+      );
+      if(response.statusCode==200){
+        final List<dynamic>data=response.data;
+        return data.map((item)=>LookUpItemModel.fromJson(item)).toList();
+
+      }else{
+        throw Exception('Failed to load cities: ${response.statusCode}');
+      }
+    } on DioException catch(e){
+      final errorMessage=e.response?.data?['message']??e.message??'Network error';
+      throw Exception(errorMessage);
+    
+    }catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
