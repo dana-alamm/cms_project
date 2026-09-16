@@ -16,13 +16,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   void initState() {
     super.initState();
+    fetchContacts();
+  }
+
+  Future<void> fetchContacts() async {
     try {
-      context.read<ContactsProvider>().fetchContacts();
+      await context.read<ContactsProvider>().fetchContacts();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceAll("Exception:", ""))),
       );
-      ;
     }
   }
 
@@ -76,6 +79,17 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           children: [
                             Expanded(
                               child: TextField(
+                                onChanged: (value) {
+                                  if (value.isEmpty) {
+                                    context
+                                        .read<ContactsProvider>()
+                                        .fetchContacts();
+                                  } else {
+                                    context
+                                        .read<ContactsProvider>()
+                                        .fetchContacts(query: value);
+                                  }
+                                },
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
