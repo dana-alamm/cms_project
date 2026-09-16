@@ -8,12 +8,22 @@ class ContactsService {
   Future<ContactResponseModel> getContacts({
     int page = 1,
     int pageSize = 10,
+    String? searchQuery,
   }) async {
     try {
-      final response = await _apiClient.get(
-        "api/contacts",
-        queryParameters: {"page": page, "pageSize": pageSize},
-      );
+      final response = searchQuery == null
+          ? await _apiClient.get(
+              "api/contacts",
+              queryParameters: {"page": page, "pageSize": pageSize},
+            )
+          : await _apiClient.get(
+              "api/contacts/search",
+              queryParameters: {
+                "page": page,
+                "pageSize": pageSize,
+                "q": searchQuery,
+              },
+            );
 
       return ContactResponseModel.fromJson(response.data);
     } on DioException catch (e) {
