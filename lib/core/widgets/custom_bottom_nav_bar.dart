@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cms_project_app/features/contacts/screens/add_contact.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -60,9 +61,9 @@ class CustomBottomNavBar extends StatelessWidget {
                     child: _NavBarItem(
                       icon: Icons.check_circle_outline_rounded,
                       label: 'Follow-ups',
-                      isSelected: currentIndex == 2,
+                      isSelected: currentIndex == 3,
                       badgeCount: 8,
-                      onTap: () => onTap?.call(2),
+                      onTap: () => onTap?.call(3),
                     ),
                   ),
 
@@ -70,8 +71,8 @@ class CustomBottomNavBar extends StatelessWidget {
                     child: _NavBarItem(
                       icon: Icons.bar_chart_rounded,
                       label: 'Analytics',
-                      isSelected: currentIndex == 3,
-                      onTap: () => onTap?.call(3),
+                      isSelected: currentIndex == 4,
+                      onTap: () => onTap?.call(4),
                     ),
                   ),
                 ],
@@ -86,7 +87,7 @@ class CustomBottomNavBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: onAddTap ?? () => onTap?.call(4),
+                  onTap: onAddTap ?? () => onTap?.call(2),
                   child: Container(
                     width: 58,
                     height: 58,
@@ -101,7 +102,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add_rounded,
                       color: Colors.white,
                       size: 32,

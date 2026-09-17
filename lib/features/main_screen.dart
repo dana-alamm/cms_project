@@ -1,5 +1,6 @@
 import 'package:cms_project_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:cms_project_app/features/analytics/analytics_screen.dart';
+import 'package:cms_project_app/features/contacts/screens/add_contact.dart';
 import 'package:cms_project_app/features/contacts/screens/contacts_screen.dart';
 import 'package:cms_project_app/features/dashboard/screens/dashboard_screen.dart';
 import 'package:cms_project_app/features/follow%20up/follow_ups_screen.dart';
@@ -18,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     const DashboardScreen(),
     const ContactsScreen(),
+    const AddContact(),
     const FollowUpsScreen(),
     const AnalyticsScreen(),
   ];
